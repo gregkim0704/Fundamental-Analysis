@@ -162,7 +162,6 @@ def render_sidebar():
         if st.button("🔍 분석 시작", key="quick_analyze", use_container_width=True):
             if quick_ticker:
                 st.session_state["analysis_ticker"] = quick_ticker.upper()
-                st.session_state["nav_page"] = "🔍 종목 분석"
                 st.rerun()
 
         st.markdown("---")
@@ -218,12 +217,10 @@ def render_watchlist_page():
             with col2:
                 if st.button("🔍 분석", key=f"analyze_{ticker}", use_container_width=True):
                     st.session_state["analysis_ticker"] = ticker
-                    st.session_state["nav_page"] = "🔍 종목 분석"
                     st.rerun()
             with col3:
                 if st.button("⚔️ 대결", key=f"battle_{ticker}", use_container_width=True):
                     st.session_state["battle_ticker"] = ticker
-                    st.session_state["nav_page"] = "⚔️ AI vs Human 대결"
                     st.rerun()
             with col4:
                 if st.button("🗑️", key=f"remove_{ticker}", use_container_width=True):
