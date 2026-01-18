@@ -502,16 +502,16 @@ def render_quick_content_generator():
     col1, col2 = st.columns(2)
 
     with col1:
-        ticker = st.text_input("종목 코드", value="005930.KS", key="quick_ticker")
-        company_name = st.text_input("회사명", value="삼성전자", key="quick_company")
+        ticker = st.text_input("종목 코드", value="005930.KS", key="yt_quick_ticker")
+        company_name = st.text_input("회사명", value="삼성전자", key="yt_quick_company")
 
     with col2:
         recommendation = st.selectbox(
             "투자의견",
             options=["매수", "보유", "매도"],
-            key="quick_rec"
+            key="yt_quick_rec"
         )
-        target_price = st.number_input("목표가", value=90000, key="quick_target")
+        target_price = st.number_input("목표가", value=90000, key="yt_quick_target")
 
     if st.button("🚀 콘텐츠 생성 (데모)", type="primary", use_container_width=True):
         with st.spinner("AI가 콘텐츠를 생성하고 있습니다..."):
