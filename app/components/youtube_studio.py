@@ -3,6 +3,7 @@
 시청자 페르소나별 맞춤 콘텐츠를 생성하고 관리하는 Streamlit UI입니다.
 """
 import streamlit as st
+import streamlit.components.v1 as components
 from datetime import datetime
 from typing import Optional
 import json
@@ -313,12 +314,26 @@ def render_title_thumbnail_tab(package: YouTubeContentPackage):
 
             html = thumbnail_generator.generate_thumbnail_html(spec, additional_data)
 
-            # 스케일 다운하여 표시
-            st.markdown(f"""
-            <div style="transform: scale(0.5); transform-origin: top left; width: 640px; height: 360px; overflow: hidden;">
-                {html}
-            </div>
-            """, unsafe_allow_html=True)
+            # 스케일 다운하여 표시 (iframe으로 렌더링)
+            scaled_html = f"""
+            <html>
+            <head>
+                <style>
+                    body {{ margin: 0; padding: 0; overflow: hidden; }}
+                    .thumbnail-container {{
+                        transform: scale(0.5);
+                        transform-origin: top left;
+                    }}
+                </style>
+            </head>
+            <body>
+                <div class="thumbnail-container">
+                    {html}
+                </div>
+            </body>
+            </html>
+            """
+            components.html(scaled_html, height=380, scrolling=False)
 
             st.json({
                 "headline": spec.headline,
